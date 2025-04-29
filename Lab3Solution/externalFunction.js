@@ -1,7 +1,7 @@
 
 // 1- open existing small window and scroll it’s content to the end . 
         let myWindow=open("https://www.google.com" , "_blank")
-        if(!myWindow)
+        if(myWindow)
         myWindow.close();
         myWindow.scroll({
             behavior: "smooth",
