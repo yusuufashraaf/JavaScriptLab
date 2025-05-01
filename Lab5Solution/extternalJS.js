@@ -19,13 +19,14 @@ function leftSlide() {
 }
 
 function slideShow() {
-  clearInterval(sliding)
   sliding = setInterval(rightSlide, 1500);
-  document.getElementById("slideBtn").disabled = true;
+  document.getElementById("slideBtn").disabled=true;
 }
 
 function stopSlideShow() {
   clearInterval(sliding);
+  document.getElementById("slideBtn").disabled=false;
+
 }
 
 nextBtn.onclick = rightSlide;
@@ -129,6 +130,18 @@ function sorts(sorting, filterStudent) {
   else filterStudent.sort((a, b) => a.studentGrading - b.studentGrading);
 }
 
+function coloringRow(student,tr){
+  if(student["studentGrading"]<=60){
+    tr.style.backgroundColor="red";
+  }
+  else if(student["studentGrading"]>=61 && student["studentGrading"]<=75){
+    tr.style.backgroundColor="black";
+  }
+  else
+  tr.style.backgroundColor="green";
+
+}
+
 function pushDataInTable(filterStudent) {
   for (const student of filterStudent) {
     const tr = document.createElement("tr");
@@ -138,11 +151,12 @@ function pushDataInTable(filterStudent) {
         <td>${student["dept"]}</td>
         <td>
             <button class="submit" onclick="studentDelete('${student["name"]}')"  >          
-            <span style="color: black;" class="material-symbols-outlined">
+            <span style="color: white;" class="material-symbols-outlined">
                 delete
             </span>
     </button></td>
         `;
+    coloringRow(student , tr);
     tbody.appendChild(tr);
   }
 }
@@ -166,7 +180,6 @@ function recordStudent() {
   const sorting = document.getElementById("sorting").value;
   tbody = document.getElementsByTagName("tbody")[0];
   tbody.innerHTML = "";
-
   filterStudent = filltering(filtering);
   sorts(sorting, filterStudent);
   pushDataInTable(filterStudent);
