@@ -20,6 +20,7 @@ function leftSlide() {
 
 function slideShow() {
   sliding = setInterval(rightSlide, 1500);
+  document.getElementById("slideBtn").disabled = true;
 }
 
 function stopSlideShow() {
