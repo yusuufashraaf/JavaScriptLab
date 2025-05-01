@@ -19,6 +19,7 @@ function leftSlide() {
 }
 
 function slideShow() {
+  clearInterval(sliding)
   sliding = setInterval(rightSlide, 1500);
   document.getElementById("slideBtn").disabled = true;
 }
