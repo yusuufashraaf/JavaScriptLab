@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="externalCSS.css" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     />
   </head>
   <body>
     <h1>1- SlideShow</h1>
-    <img src="imgs/1.png" id="sliderImg" />
+    <img src="imgs/1.png" id="sliderImg" alt="Slideshow image" />
     <div class="buttons">
       <button id="nextBtn">Next</button>
       <button id="preBtn">Previous</button>
@@ -24,58 +24,57 @@
     <h1>
       2- Complete the Student form demo to achieve the following requirements.
     </h1>
-
-    <div class="Form">
-      <br />
+    <form class="Form" onsubmit="newStudent(event)">
       <div class="labels">
-      <label>Department:</label>
-      <input type="radio" id="r1" value="SD" name="Department" checked />
-      <label for="r1">SD</label>
+        <label>Department:</label>
+        <input type="radio" id="r1" value="SD" name="Department" checked />
+        <label for="r1">SD</label>
 
-      <input type="radio" id="r2" value="OS" name="Department" />
-      <label for="r2">OS</label>
+        <input type="radio" id="r2" value="OS" name="Department" />
+        <label for="r2">OS</label>
 
-      <input type="radio" id="r3" value="EL" name="Department" />
-      <label for="r3">EL</label>
-      <label id="deptError"></label>
+        <input type="radio" id="r3" value="EL" name="Department" />
+        <label for="r3">EL</label>
+
+        <label id="deptError"></label>
       </div>
-      <br />
-      <br />
-      <br />
+      <br /><br /><br />
+
       <div class="labels">
-        <label>StudentName:</label>
+        <label for="studentName">Student Name:</label>
         <input type="text" id="studentName" />
         <label id="nameError"></label>
       </div>
-      <br />
-      <br />
+      <br /><br />
+
       <div class="labels">
-      <label>StudentGrade:</label>
-      <input type="text" id="studentGrade" />
-      <label id="gradeError"></label>
+        <label for="studentGrade">Student Grade:</label>
+        <input type="number" id="studentGrade" />
+        <label id="gradeError"></label>
       </div>
-      <br />
-      <br />
-      <button class="add" type="submit" onclick="newStudent(event)">Add</button>
-      <br />
-      <br />
-      <label class="sort"
-        >Sort:
+      <br /><br />
+
+      <button class="add" type="submit">Add</button>
+      <br /><br />
+
+      <label class="sort">
+        Sort:
         <select id="sorting" onchange="recordStudent()">
           <option value="name">Name</option>
           <option value="grade">Grade</option>
         </select>
       </label>
-      <label class="filter"
-        >Filter:
+
+      <label class="filter">
+        Filter:
         <select id="filtering" onchange="recordStudent()">
           <option value="none">None</option>
           <option value="failed">Failed</option>
-          <option value="success">succeded</option>
+          <option value="success">Succeeded</option>
         </select>
       </label>
-      <br />
-      <br />
+      <br /><br />
+
       <table>
         <thead>
           <tr>
@@ -85,7 +84,28 @@
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody id="studentTableBody"></tbody>
+      </table>
+    </form>
+
+    <h1>3- Bonus To Do List</h1>
+    <div class="form1">
+      <label id="toDoOrganizer">To Do Organizer</label>
+      <input type="text" id="toDoSearch" />
+      <label id="toDoErrors"></label>
+      <br>
+      <br>
+      
+      <button id="toDoButton">Add</button>
+      <table>
+        <thead>
+          <tr>
+            <th>Done</th>
+            <th>Task</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody id="toDoTableBody"></tbody>
       </table>
     </div>
 

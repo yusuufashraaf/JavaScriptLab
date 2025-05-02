@@ -1,4 +1,174 @@
-body{
+body {
+  background-color: #222;
+  color: white;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  margin: 20px auto;
+  height: 800px;
+  width: 1200px;
+}
+
+.buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  background-color: #2e7958;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+hr {
+  border: 10px solid white;
+  border-radius: 20px;
+  margin: 40px 0;
+}
+
+.Form,
+.form1 {
+  background-color: #2e7958;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 40px auto;
+  border-radius: 8px;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+.add {
+  width: 250px;
+  padding: 12px 20px;
+  margin: 8px 10px 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+select {
+  width: 200px;
+}
+
+#nameError,
+#gradeError,
+#deptError {
+  color: black;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.add {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  margin: 20px auto;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sort,
+.filter {
+  display: inline-block;
+  margin: 20px 40px 20px 0;
+  font-size: 24px;
+}
+
+.labels {
+  margin: 20px 0;
+  font-size: 24px;
+}
+
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  color: black;
+}
+
+.Form table {
+  background-color: #1b4965;
+}
+
+thead {
+  background-color: #1b4965;
+}
+
+th,
+td {
+  border: 1px solid #222;
+  padding: 10px;
+  text-align: left;
+  background-color: transparent;
+  height: 0px;
+}
+table tbody,
+th,
+tr,
+td {
+  height: 0px !important;
+}
+
+.submit {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  width: 20px;
+  cursor: pointer;
+}
+
+.form1 {
+  padding-top: 40px;
+  padding-bottom: 100px;
+}
+
+#toDoOrganizer {
+  font-size: 40px;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#toDoSearch {
+  width: 50%;
+  padding: 12px;
+  margin: 0 auto 20px auto;
+  display: block;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+#toDoButton {
+  display: block;
+  margin: 0 auto 40px auto;
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
+
+#toDoErrors {
+  color: black;
+  margin-left: 350px;
+}
+
+/* body{
     background-color: #222;
     color: white;
     font-size: 20px;
@@ -17,7 +187,7 @@ img{
 }
 
 button {
-    background-color: #2E7958; /* Green */
+    background-color: #2E7958;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -32,11 +202,10 @@ hr{
     border-radius: 20px;
   }
 
-.Form{
+.Form, .form1{
     background-color: #2E7958;
     padding-bottom: 70px;
     margin: auto;
-    height: 820px;
 }
 
 #deptError{
@@ -72,7 +241,7 @@ input[type=text], select ,.add {
 }
 
 
-.sort , .Form  , .filter  , .labels {
+.sort , .Form  , .filter  , .labels , .form1{
     margin-left: 40px !important;
 }
 .Form table{
@@ -105,3 +274,16 @@ table{
     display: inline;
     margin-left: 300px !important;
 }
+
+.form1{
+    padding-bottom: 800px;
+    width: 100%;
+    padding-top: 40px;
+}
+
+
+
+#toDoOrganizer{
+    font-size: 40px;
+    margin: auto;
+} */

@@ -20,13 +20,12 @@ function leftSlide() {
 
 function slideShow() {
   sliding = setInterval(rightSlide, 1500);
-  document.getElementById("slideBtn").disabled=true;
+  document.getElementById("slideBtn").disabled = true;
 }
 
 function stopSlideShow() {
   clearInterval(sliding);
-  document.getElementById("slideBtn").disabled=false;
-
+  document.getElementById("slideBtn").disabled = false;
 }
 
 nextBtn.onclick = rightSlide;
@@ -130,16 +129,15 @@ function sorts(sorting, filterStudent) {
   else filterStudent.sort((a, b) => a.studentGrading - b.studentGrading);
 }
 
-function coloringRow(student,tr){
-  if(student["studentGrading"]<=60){
-    tr.style.backgroundColor="red";
-  }
-  else if(student["studentGrading"]>=61 && student["studentGrading"]<=75){
-    tr.style.backgroundColor="black";
-  }
-  else
-  tr.style.backgroundColor="green";
-
+function coloringRow(student, tr) {
+  if (student["studentGrading"] <= 60) {
+    tr.style.backgroundColor = "red";
+  } else if (
+    student["studentGrading"] >= 61 &&
+    student["studentGrading"] <= 75
+  ) {
+    tr.style.backgroundColor = "#E07A5F";
+  } else tr.style.backgroundColor = "green";
 }
 
 function pushDataInTable(filterStudent) {
@@ -156,7 +154,7 @@ function pushDataInTable(filterStudent) {
             </span>
     </button></td>
         `;
-    coloringRow(student , tr);
+    coloringRow(student, tr);
     tbody.appendChild(tr);
   }
 }
@@ -205,3 +203,110 @@ students.push({  name:pascalCase("zyad ashraf")  ,
         console.log(student['name'])
     }
  */
+
+/////////////////////////////3 bonus
+
+const tasks = [];
+//Making listener for add button
+document
+  .getElementById("toDoButton")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    toDoAddTask();
+  });
+
+function taskPush(name) {
+  tasks.push({ name: name, done: false });
+}
+
+function clearingSearch() {
+  toDoSearch.value = "";
+  document.getElementById("toDoErrors").innerHTML = "";
+}
+
+function checkTaskError(taskName) {
+  let TaskErrorIndex = tasks.findIndex((elem) => elem.name === taskName);
+  if (TaskErrorIndex !== -1) {
+    document.getElementById("toDoErrors").innerHTML = "You have the same task";
+    return false;
+  }
+  if (!taskName || !/^[A-z][a-zA-Z, .]*$/.test(taskName)) {
+    document.getElementById("toDoErrors").innerHTML = "You task can not be empty and the text must be alphabet";
+
+    return false;
+  }
+  return true;
+}
+
+function taskDelete(taskName, event) {
+  let taskNameIndex = tasks.findIndex((elem) => elem.name === taskName);
+  if (taskNameIndex !== -1) {
+    tasks.splice(taskNameIndex, 1);
+  }
+  clearingSearch()
+  pushTaskInTable();
+}
+
+function toDoAddTask() {
+  let toDoSearch = document.getElementById("toDoSearch");
+  let ToDoSearchValue = document.getElementById("toDoSearch").value;
+  if (!checkTaskError(ToDoSearchValue)) return false;
+  taskPush(ToDoSearchValue);
+  clearingSearch();
+  pushTaskInTable();
+}
+
+function lineThroughTask(checkTask) {
+  let index = tasks.findIndex((elem) => elem.name === checkTask);
+  let isCheck = document.getElementById(
+    "toDoCheckBox " + `${checkTask}`
+  ).checked;
+  let taskName = document.getElementById("id " + `${checkTask}`);
+  if (isCheck) {
+    taskName.style.textDecoration = "line-through";
+    tasks[index].done = true;
+  } else {
+    taskName.style.textDecoration = "none";
+    tasks[index].done = false;
+  }
+}
+
+function pushTaskInTable() {
+  tbody = document.getElementsByTagName("tbody")[1];
+  tbody.innerHTML = "";
+  for (const elem of tasks) {
+    const tr = document.createElement("tr");
+
+    doneCell = document.createElement("td");
+    checkBox = document.createElement("input");
+    checkBox.type = "checkbox";
+    checkBox.setAttribute("id", "toDoCheckBox " + `${elem.name}`);
+
+    doneCell.append(checkBox);
+    checkBox.addEventListener("click", () => lineThroughTask(elem.name));
+
+    taskCell = document.createElement("td");
+    taskCell.textContent = elem.name;
+    taskCell.setAttribute("id", "id " + `${elem.name}`);
+
+    buttonCell = document.createElement("td");
+    button = document.createElement("button");
+    button.setAttribute("type", "button");
+    button.innerHTML = `<span id ="spanButton" style="color: white;" class="material-symbols-outlined">delete</span>`;
+    buttonCell.append(button);
+    button.addEventListener("click", function (event) {
+      event.stopPropagation();
+      event.preventDefault();
+      taskDelete(elem.name);
+    });
+    tr.appendChild(doneCell);
+    tr.appendChild(taskCell);
+    tr.appendChild(buttonCell);
+
+    checkBox.checked = elem.done === true;
+    if (elem.done === true) {
+      taskCell.style.textDecoration = "line-through";
+    }
+    tbody.appendChild(tr);
+  }
+}
