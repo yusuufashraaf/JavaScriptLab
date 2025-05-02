@@ -111,12 +111,12 @@ function filltering(filtering) {
   let filterStudent = [...students];
   if (filtering === "failed")
     filterStudent = filterStudent.filter(
-      (studentGrade) => studentGrade["studentGrading"] < 60
+      (studentGrade) => studentGrade["studentGrading"] <= 60
     );
 
   if (filtering === "success")
     filterStudent = filterStudent.filter(
-      (studentGrade) => studentGrade["studentGrading"] >= 60
+      (studentGrade) => studentGrade["studentGrading"] >= 61
     );
 
   if (filtering === "none") filterStudent = filterStudent;
