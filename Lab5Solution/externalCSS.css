@@ -114,12 +114,20 @@ td {
   text-align: left;
   background-color: transparent;
   height: 0px;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 200px;
 }
 table tbody,
 th,
 tr,
 td {
   height: 0px !important;
+}
+
+#center{
+  text-align: center;
 }
 
 .submit {
@@ -168,3 +176,7 @@ td {
   margin-left: 350px;
 }
 
+.button1{
+  height: 0px !important;
+  padding: 0px !important;
+}

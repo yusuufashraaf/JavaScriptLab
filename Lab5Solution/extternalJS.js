@@ -74,8 +74,8 @@ function checkErrors(naming, grade, depts) {
     return false;
   }
 
-  if (!naming || !/^[A-z][a-zA-Z]*$/.test(naming)) {
-    nameError.innerHTML = "Student name can't be empty and must be alphabetic";
+  if (!/^[a-zA-Z]+$/.test(naming)) {
+    nameError.innerHTML = "Student name can't be empty and must be alphabetic consist of one word";
     return false;
   }
 
@@ -169,7 +169,6 @@ function newStudent(event) {
   pushStudent(sName, gStudent, checkedDept);
   clearing();
   recordStudent();
-  return false;
 }
 
 //function after filtering and sorting to push data in table
@@ -230,8 +229,9 @@ function checkTaskError(taskName) {
     document.getElementById("toDoErrors").innerHTML = "You have the same task";
     return false;
   }
-  if (!taskName || !/^[A-z][a-zA-Z, .]*$/.test(taskName)) {
-    document.getElementById("toDoErrors").innerHTML = "You task can not be empty and the text must be alphabet";
+  if (!taskName || !/^[A-Za-z ,]+$/.test(taskName)) {
+    document.getElementById("toDoErrors").innerHTML =
+      "You task can not be empty and the text must be alphabet";
 
     return false;
   }
@@ -243,15 +243,14 @@ function taskDelete(taskName, event) {
   if (taskNameIndex !== -1) {
     tasks.splice(taskNameIndex, 1);
   }
-  clearingSearch()
+  clearingSearch();
   pushTaskInTable();
 }
 
 function toDoAddTask() {
-  let toDoSearch = document.getElementById("toDoSearch");
   let ToDoSearchValue = document.getElementById("toDoSearch").value;
   if (!checkTaskError(ToDoSearchValue)) return false;
-  taskPush(ToDoSearchValue);
+  taskPush(pascalCase(ToDoSearchValue));
   clearingSearch();
   pushTaskInTable();
 }
@@ -272,41 +271,30 @@ function lineThroughTask(checkTask) {
 }
 
 function pushTaskInTable() {
-  tbody = document.getElementsByTagName("tbody")[1];
+  const tbody = document.getElementsByTagName("tbody")[1];
   tbody.innerHTML = "";
-  for (const elem of tasks) {
-    const tr = document.createElement("tr");
 
-    doneCell = document.createElement("td");
-    checkBox = document.createElement("input");
-    checkBox.type = "checkbox";
-    checkBox.setAttribute("id", "toDoCheckBox " + `${elem.name}`);
+  for (let { name, done } of tasks) {
+    tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td id="center">
+        <input type="checkbox" class="checkbox" id="toDoCheckBox ${name}" ${
+      done ? "checked" : ""
+    }>
+      </td>
+      <td id="id ${name}" style="text-decoration: ${
+      done ? "line-through" : "none"
+    }">${name}</td>
+      <td id="center">
+        <button type="button" class="button1" onclick="taskDelete('${name}')">
+          <span id="spanButton" style="color:white;" class="material-symbols-outlined">delete</span>
+        </button>
+      </td>`;
 
-    doneCell.append(checkBox);
-    checkBox.addEventListener("click", () => lineThroughTask(elem.name));
+    tr.querySelector("input[type=checkbox]").addEventListener("click", () =>
+      lineThroughTask(name)
+    );
 
-    taskCell = document.createElement("td");
-    taskCell.textContent = elem.name;
-    taskCell.setAttribute("id", "id " + `${elem.name}`);
-
-    buttonCell = document.createElement("td");
-    button = document.createElement("button");
-    button.setAttribute("type", "button");
-    button.innerHTML = `<span id ="spanButton" style="color: white;" class="material-symbols-outlined">delete</span>`;
-    buttonCell.append(button);
-    button.addEventListener("click", function (event) {
-      event.stopPropagation();
-      event.preventDefault();
-      taskDelete(elem.name);
-    });
-    tr.appendChild(doneCell);
-    tr.appendChild(taskCell);
-    tr.appendChild(buttonCell);
-
-    checkBox.checked = elem.done === true;
-    if (elem.done === true) {
-      taskCell.style.textDecoration = "line-through";
-    }
     tbody.appendChild(tr);
   }
 }
