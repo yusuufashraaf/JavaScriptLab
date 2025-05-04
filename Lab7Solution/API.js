@@ -41,6 +41,6 @@ Promise.all([
       <td>${postsList}</td>
     `;
 
-    table.appendChild(row);
+    table.appendChild(tr);
   });
 });
