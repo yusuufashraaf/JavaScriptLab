@@ -12,17 +12,16 @@ async function returnData() {
 let tbody = document.getElementsByTagName("tbody")[0];
 let result = returnData().then((data) => {
   data.user.forEach((element) => {
-    const userPost = data.post.filter((elem) => elem.userId === element.id);
-    console.log(userPost);
-    userPost.forEach((elem) => (postList = `<ul><li>${elem.title}</li>`));
 
+    let userPost = data.post.filter((elem) => elem.userId === element.id);
     postsList = "<ul>";
+
     userPost.forEach((post) => {
-      const postComments = data.comment.filter((c) => c.postId === post.id);
+      let postComments = data.comment.filter((c) => c.postId === post.id);
       postsList += `<li>${post.title} (Comments: ${postComments.length})</li>`;
     });
-
     postsList += "</ul>";
+    
     let tr = document.createElement("tr");
     tr.innerHTML = `
     <td>${element.name}</td>
@@ -35,5 +34,3 @@ let result = returnData().then((data) => {
     tbody.appendChild(tr);
   });
 });
-
-
